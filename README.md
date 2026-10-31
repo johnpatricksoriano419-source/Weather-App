@@ -1,45 +1,34 @@
 🌦️ Weather App
-A clean, responsive weather app for quickly checking current conditions in any city. Search by city name to view real-time weather data powered by the OpenWeatherMap API.
+Check current weather conditions for any city with a clean, responsive interface powered by the OpenWeatherMap API.
 
 ✨ Key Features
-🔎 Search for current weather by city name
+🔎 Search for real-time weather by city name
 🌡️ View temperature and weather conditions
 💧 Check humidity and wind speed
-📱 Responsive interface for desktop and mobile
-⚠️ Helpful error handling for invalid cities and network issues
+📱 Responsive design for desktop and mobile
+⚠️ Error handling for invalid cities and network issues
 🛠️ Tech Stack
 HTML5 CSS3 JavaScript OpenWeatherMap
 
 🚀 How to Run Locally
 Prerequisites
-Git
 A modern web browser
 An OpenWeatherMap API key
 Setup
-Clone the repository:
+Download the project files and place them in a folder on your computer.
 
-bash
+Add your OpenWeatherMap API key in the JavaScript file where the API request is configured.
 
-git clone https://github.com/johnpatricksoriano419-source/weather-app.git
-If your repository has a different name, replace weather-app with its name.
+Open the project folder in your preferred editor.
 
-Move into the project directory:
-
-bash
-
-cd weather-app
-Configure your OpenWeatherMap API key in the JavaScript file where the API request is made.
-
-Keep your API key private. Do not commit it to a public repository.
-
-Start a local development server. For example, with Python:
+Run the app using a local development server, such as the VS Code Live Server extension, or with Python:
 
 bash
 
 python -m http.server 8000
 Open http://localhost:8000 in your browser.
 
-You can also open index.html directly or use a development server such as the VS Code Live Server extension.
+Keep your API key private and avoid committing it to a public repository.
 
 📁 Folder Structure
 text
@@ -49,11 +38,16 @@ weather-app/
 ├── style.css        # Styles and responsive layout
 ├── script.js        # Weather search and API logic
 └── assets/          # Optional images, icons, or other static files
-Update this tree if your project uses different filenames or folders.
+Adjust the tree to match your project’s actual files and folders.
 
 🗺️ Future Improvements
 [ ] Add a 5-day weather forecast
 [ ] Support location-based weather with geolocation
-[ ] Add a dark mode
-[ ] Display recent or saved city searches
-[ ] Add unit switching between Celsius and Fahrenheit
+[ ] Add dark mode
+[ ] Save recent or favorite cities
+[ ] Add Celsius and Fahrenheit unit switching
+👤 Author
+John Patrick Soriano
+
+Visit my GitHub profile
+
