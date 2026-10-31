@@ -1,0 +1,72 @@
+/* Sticky glass nav bar and the unit toggle inside it. */
+
+.site-header {
+  border-inline: 0;
+  border-top: 0;
+  border-radius: 0;
+  box-shadow: var(--glass-shadow);
+}
+
+.site-nav__actions {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+.unit-toggle,
+.background-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-1);
+  min-width: 44px;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  border: 1px solid var(--color-accent-20);
+  border-radius: var(--radius-ui);
+  font-size: var(--text-sm);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-secondary);
+  transition:
+    color var(--time-hover) var(--ease-hover),
+    border-color var(--time-hover) var(--ease-hover),
+    background-color var(--time-hover) var(--ease-hover);
+}
+
+.unit-toggle:hover,
+.unit-toggle:focus-visible,
+.background-toggle:hover,
+.background-toggle:focus-visible {
+  color: var(--color-text);
+  border-color: var(--color-accent-60);
+  background-color: var(--color-accent-20);
+}
+
+/* Naka-on ang white background */
+.background-toggle[aria-pressed="true"] {
+  color: var(--color-text);
+  border-color: var(--color-accent-60);
+  background-color: var(--color-accent-20);
+}
+
+.background-toggle__swatch {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  border: 1px solid var(--color-border);
+  background-color: #fff;
+}
+
+/* Mobile: swatch lang, para kasya sa maliit na screen */
+.background-toggle__label {
+  display: none;
+  text-transform: uppercase;
+}
+
+@media (min-width: 48rem) {
+  .background-toggle__label {
+    display: inline;
+  }
+}

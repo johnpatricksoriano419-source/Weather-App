@@ -1,0 +1,119 @@
+/* Design tokens — the only place colors, spacing, type, and motion are defined.
+   Anything visual elsewhere must reference these variables. */
+
+:root {
+  color-scheme: light dark;
+
+  /* Surfaces */
+  --color-bg: #f7f4ee;
+  --color-bg-glow: rgb(176 141 87 / 0.1);
+  --color-marble: #ede9e0;
+  --color-border: rgb(28 27 25 / 0.12);
+
+  /* Text */
+  --color-text: #1c1b19;
+  --color-text-secondary: rgb(28 27 25 / 0.7);
+  --color-text-tertiary: rgb(28 27 25 / 0.45);
+
+  /* Accent — the one and only accent in the system */
+  --color-accent: #b08d57;
+  --color-accent-60: rgb(176 141 87 / 0.6);
+  --color-accent-20: rgb(176 141 87 / 0.2);
+  --color-on-accent: #121212;
+
+  /* Glass — light mode needs more surface opacity to hold 4.5:1 contrast */
+  --glass-bg: rgb(255 255 255 / 0.45);
+  --glass-border: rgb(28 27 25 / 0.08);
+  --glass-blur: blur(16px) saturate(140%);
+  --glass-shadow: 0 24px 60px -36px rgb(28 27 25 / 0.45);
+  --glass-shadow-lift: 0 28px 60px -32px rgb(28 27 25 / 0.4);
+
+  /* Typography — one family for the whole app: Geist Sans */
+  --font-sans: "Geist", "Inter", "DM Sans", system-ui, -apple-system, "Segoe UI",
+    sans-serif;
+  --tracking-label: 0.12em;
+
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: 1rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+  --text-2xl: clamp(1.75rem, 3vw, 2.25rem);
+  --text-display: clamp(2.5rem, 6vw, 4.25rem);
+  --text-weather: clamp(3rem, 9vw, 5rem);
+
+  /* Spacing — every value is a multiple of 8px */
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+  --space-8: 64px;
+  --space-10: 80px;
+  --space-15: 120px;
+
+  /* Layout */
+  --content-width: 72rem;
+  --nav-height: 72px;
+  --section-padding: var(--space-10);
+
+  /* Shape */
+  --radius-card: 16px;
+  --radius-ui: 2px;
+
+  /* Motion */
+  --time-reveal: 700ms;
+  --time-hover: 180ms;
+  --ease-reveal: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-hover: ease-out;
+}
+
+@media (min-width: 48rem) {
+  :root {
+    --section-padding: var(--space-15);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --color-bg: #121212;
+    --color-bg-glow: rgb(176 141 87 / 0.12);
+    --color-marble: #1c1c1c;
+    --color-border: rgb(255 255 255 / 0.14);
+
+    --color-text: #f2eee6;
+    --color-text-secondary: rgb(242 238 230 / 0.7);
+    --color-text-tertiary: rgb(242 238 230 / 0.45);
+
+    --glass-bg: rgb(255 255 255 / 0.08);
+    --glass-border: rgb(255 255 255 / 0.14);
+    --glass-shadow: 0 24px 60px -32px rgb(0 0 0 / 0.8);
+    --glass-shadow-lift: 0 28px 60px -30px rgb(0 0 0 / 0.9);
+
+    --color-on-accent: #121212;
+  }
+}
+
+/* Optional pure-white canvas, turned on by the "White" toggle in the nav.
+   Sinasadya nitong i-override ang dark mode: para manatiling mabasa,
+   ibinabalik din natin sa dark ang text at border tokens.
+   Mas mataas ang specificity ng :root[data-background] kaya panalo ito
+   kahit nasa loob ng dark-mode media query ang defaults. */
+:root[data-background="white"] {
+  color-scheme: light;
+
+  --color-bg: #ffffff;
+  --color-bg-glow: rgb(176 141 87 / 0.06);
+  --color-marble: #f4f2ee;
+  --color-border: rgb(28 27 25 / 0.14);
+
+  --color-text: #1c1b19;
+  --color-text-secondary: rgb(28 27 25 / 0.7);
+  --color-text-tertiary: rgb(28 27 25 / 0.45);
+
+  --glass-bg: rgb(28 27 25 / 0.04);
+  --glass-border: rgb(28 27 25 / 0.1);
+  --glass-shadow: 0 24px 60px -36px rgb(28 27 25 / 0.35);
+  --glass-shadow-lift: 0 28px 60px -32px rgb(28 27 25 / 0.3);
+}

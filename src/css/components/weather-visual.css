@@ -1,0 +1,280 @@
+/* Animated condition art inside the current-conditions card.
+   One inline SVG, one scene per weather family. The JS only swaps
+   data-visual; CSS decides which scene shows and how it moves.
+   Scenes are monochrome + accent so the card keeps its minimal look. */
+
+.weather-visual {
+  position: relative;
+  width: clamp(6rem, 22vw, 9rem);
+  aspect-ratio: 10 / 7;
+  color: var(--color-text-secondary);
+  pointer-events: none;
+}
+
+/* Soft accent glow behind the sun scenes. */
+.weather-visual::before {
+  content: "";
+  position: absolute;
+  inset: 10% 10% 24%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--color-accent-20), transparent 70%);
+  opacity: 0;
+  transition: opacity var(--time-reveal) var(--ease-reveal);
+}
+
+.weather-visual[data-visual="clear"]::before,
+.weather-visual[data-visual="partly"]::before {
+  opacity: 1;
+}
+
+.weather-visual__scene {
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+/* Paint comes from tokens here, not from presentation attributes,
+   so light/dark and the white background keep working. */
+.wv-sun-stop {
+  stop-color: var(--color-accent);
+}
+
+.wv-sun-stop--soft {
+  stop-color: var(--color-accent-60);
+}
+
+.wv-sun__halo {
+  stroke: var(--color-accent-20);
+}
+
+.wv-sun__rays {
+  stroke: var(--color-accent);
+}
+
+.wv-cloud-set,
+.wv-cloud-use,
+.wv-fog-set {
+  fill: var(--color-text-secondary);
+}
+
+.wv-drops {
+  stroke: var(--color-accent);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+}
+
+.wv-bolt,
+.wv-flakes {
+  fill: var(--color-accent);
+}
+
+/* Hide every scene by default; the matching data-visual turns one on. */
+.weather-visual__scene [data-scene] {
+  display: none;
+}
+
+.weather-visual[data-visual="clear"] [data-scene="sun"],
+.weather-visual[data-visual="partly"] [data-scene="sun"],
+.weather-visual[data-visual="partly"] [data-scene="cloud"],
+.weather-visual[data-visual="cloudy"] [data-scene="cloud"],
+.weather-visual[data-visual="rain"] [data-scene="rain"],
+.weather-visual[data-visual="storm"] [data-scene="storm"],
+.weather-visual[data-visual="snow"] [data-scene="snow"],
+.weather-visual[data-visual="fog"] [data-scene="fog"] {
+  display: inline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wv-sun__rays {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-spin 46s linear infinite;
+  }
+
+  .wv-sun__halo {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-breathe 7s ease-in-out infinite;
+  }
+
+  .wv-sun__core {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-sun-pulse 7s ease-in-out infinite;
+  }
+
+  .wv-cloud {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-drift 9s ease-in-out infinite;
+  }
+
+  .wv-cloud--back {
+    animation-duration: 13s;
+    animation-direction: reverse;
+  }
+
+  .wv-cloud--front {
+    animation-delay: -2.5s;
+  }
+
+  .wv-drop {
+    transform-box: fill-box;
+    animation: wv-rain 1.15s linear infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-flake {
+    transform-box: fill-box;
+    animation: wv-snow 4.5s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-fog-line {
+    transform-box: fill-box;
+    animation: wv-fog 8s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-bolt {
+    animation: wv-flash 5.5s steps(1, end) infinite;
+  }
+}
+
+@keyframes wv-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wv-breathe {
+  0%,
+  100% {
+    transform: scale(0.94);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+}
+
+@keyframes wv-sun-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.035);
+  }
+}
+
+@keyframes wv-drift {
+  0%,
+  100% {
+    transform: translateX(-5px);
+  }
+
+  50% {
+    transform: translateX(5px);
+  }
+}
+
+@keyframes wv-rain {
+  0% {
+    transform: translateY(-5px);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  75% {
+    opacity: 0.75;
+  }
+
+  100% {
+    transform: translateY(18px);
+    opacity: 0;
+  }
+}
+
+@keyframes wv-snow {
+  0% {
+    transform: translate(0, -4px);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.9;
+  }
+
+  55% {
+    transform: translate(3px, 7px);
+  }
+
+  100% {
+    transform: translate(-2px, 18px);
+    opacity: 0;
+  }
+}
+
+@keyframes wv-fog {
+  0%,
+  100% {
+    transform: translateX(-6px);
+  }
+
+  50% {
+    transform: translateX(6px);
+  }
+}
+
+@keyframes wv-flash {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  40% {
+    opacity: 0.85;
+  }
+
+  84% {
+    opacity: 0.6;
+  }
+
+  85%,
+  88% {
+    opacity: 1;
+  }
+
+  86% {
+    opacity: 0.3;
+  }
+
+  90% {
+    opacity: 0.95;
+  }
+
+  93% {
+    opacity: 0.7;
+  }
+}
+
+/* Keep the art from crowding the big number on small phones. */
+@media (max-width: 30rem) {
+  .weather-visual {
+    width: 5.5rem;
+  }
+}
+
+@media (max-width: 20rem) {
+  .weather-visual {
+    width: 4.5rem;
+  }
+}

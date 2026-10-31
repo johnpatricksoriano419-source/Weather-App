@@ -1,0 +1,36 @@
+/* Shared glass surface recipe: nav bar, weather card, forecast cards.
+   Glass stays limited to these surfaces — never every element. */
+
+.site-header,
+.weather-card,
+.forecast-card {
+  background-color: var(--glass-bg);
+  -webkit-backdrop-filter: var(--glass-blur);
+  backdrop-filter: var(--glass-blur);
+  border: 1px solid var(--glass-border);
+}
+
+@supports not ((-webkit-backdrop-filter: blur(1px)) or (backdrop-filter: blur(1px))) {
+  .site-header,
+  .weather-card,
+  .forecast-card {
+    background-color: var(--color-marble);
+  }
+}
+
+.weather-card,
+.forecast-card {
+  border-radius: var(--radius-card);
+  box-shadow: var(--glass-shadow);
+  transition:
+    transform var(--time-hover) var(--ease-hover),
+    box-shadow var(--time-hover) var(--ease-hover);
+}
+
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .weather-card:hover,
+  .forecast-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--glass-shadow-lift);
+  }
+}

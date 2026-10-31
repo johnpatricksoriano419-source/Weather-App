@@ -1,0 +1,104 @@
+/* Five-day forecast grid, empty state, and staggered entrance. */
+
+.forecast-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-2);
+}
+
+.forecast-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  min-width: 0;
+  min-height: 10.5rem;
+  padding: var(--space-3);
+  text-align: center;
+}
+
+.forecast-card__day {
+  font-family: var(--font-sans);
+  font-size: var(--text-lg);
+  font-weight: 500;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.forecast-card__date {
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-secondary);
+}
+
+.forecast-card__condition {
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.forecast-card__temps {
+  display: flex;
+  justify-content: center;
+  gap: var(--space-2);
+  margin-top: auto;
+  padding-top: var(--space-2);
+  font-size: var(--text-lg);
+  font-variant-numeric: tabular-nums;
+}
+
+.forecast-card__high {
+  color: var(--color-text);
+}
+
+.forecast-card__low {
+  color: var(--color-text-secondary);
+}
+
+.forecast-empty {
+  grid-column: 1 / -1;
+  padding: var(--space-5) var(--space-3);
+  border: 1px dashed var(--color-accent-20);
+  border-radius: var(--radius-card);
+  text-align: center;
+  color: var(--color-text-secondary);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .forecast-card {
+    animation: rise 600ms var(--ease-reveal) backwards;
+  }
+
+  .forecast-card:nth-child(2) {
+    animation-delay: 80ms;
+  }
+
+  .forecast-card:nth-child(3) {
+    animation-delay: 160ms;
+  }
+
+  .forecast-card:nth-child(4) {
+    animation-delay: 240ms;
+  }
+
+  .forecast-card:nth-child(5) {
+    animation-delay: 320ms;
+  }
+}
+
+@media (min-width: 40rem) {
+  .forecast-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 48rem) {
+  .forecast-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 64rem) {
+  .forecast-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}

@@ -1,0 +1,96 @@
+/* City search form and the aria-live status line under it. */
+
+.search {
+  width: 100%;
+  max-width: 34rem;
+}
+
+.search__label {
+  display: block;
+  margin-bottom: var(--space-1);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  color: var(--color-text-secondary);
+}
+
+.search__row {
+  display: flex;
+  gap: var(--space-1);
+}
+
+.search__input {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  padding: 0 var(--space-2);
+  background-color: var(--color-marble);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-ui);
+  font-size: var(--text-base);
+  transition:
+    border-color var(--time-hover) var(--ease-hover),
+    box-shadow var(--time-hover) var(--ease-hover);
+}
+
+.search__input::placeholder {
+  color: var(--color-text-secondary);
+  opacity: 1;
+}
+
+.search__input:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px var(--color-accent-20);
+}
+
+.search__button {
+  flex: 0 0 auto;
+  min-height: 48px;
+  padding-inline: var(--space-3);
+  background-color: var(--color-accent);
+  border-radius: var(--radius-ui);
+  color: var(--color-on-accent);
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+  letter-spacing: var(--tracking-label);
+  transition:
+    transform var(--time-hover) var(--ease-hover),
+    box-shadow var(--time-hover) var(--ease-hover);
+}
+
+.search__button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px -12px var(--color-accent-60);
+}
+
+.search__button:active {
+  transform: translateY(0);
+}
+
+.search__button:focus-visible {
+  outline-color: var(--color-text);
+}
+
+.search__hint {
+  margin-top: var(--space-1);
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.status {
+  min-height: 1.5em;
+  font-size: var(--text-sm);
+  color: var(--color-text-secondary);
+}
+
+.status:empty {
+  display: none;
+}
+
+.status[data-state="error"] {
+  color: var(--color-text);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent-60);
+  text-underline-offset: 4px;
+}

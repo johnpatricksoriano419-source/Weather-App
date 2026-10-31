@@ -1,0 +1,18 @@
+/* Loading, disabled, and busy states. */
+
+.search__button:disabled {
+  opacity: 0.6;
+  cursor: progress;
+  transform: none;
+  box-shadow: none;
+}
+
+.weather-card[aria-busy="true"],
+.forecast-grid[aria-busy="true"] {
+  opacity: 0.55;
+  transition: opacity var(--time-hover) var(--ease-hover);
+}
+
+.status[data-state="loading"] {
+  color: var(--color-text-tertiary);
+}

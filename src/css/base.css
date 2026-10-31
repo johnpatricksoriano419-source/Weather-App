@@ -1,0 +1,150 @@
+/* Reset, page canvas, and shared primitives. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-padding-top: calc(var(--nav-height) + var(--space-3));
+}
+
+body {
+  margin: 0;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-bg);
+  background-image: radial-gradient(
+    120% 80% at 50% -10%,
+    var(--color-bg-glow),
+    transparent 60%
+  );
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  transition:
+    background-color var(--time-hover) var(--ease-hover),
+    color var(--time-hover) var(--ease-hover);
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  color: var(--color-text);
+  text-wrap: balance;
+}
+
+p {
+  margin: 0;
+  text-wrap: pretty;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input {
+  font: inherit;
+  color: inherit;
+}
+
+button {
+  border: 0;
+  background: none;
+  cursor: pointer;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+  border-radius: var(--radius-ui);
+}
+
+::selection {
+  background: var(--color-accent-20);
+}
+
+/* Entrance motion: fade up. Transform and opacity only. */
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__eyebrow,
+  .hero__title,
+  .hero__lede,
+  .search {
+    animation: rise var(--time-reveal) var(--ease-reveal) backwards;
+  }
+
+  .hero__eyebrow {
+    animation-delay: 0ms;
+  }
+
+  .hero__title {
+    animation-delay: 80ms;
+  }
+
+  .hero__lede {
+    animation-delay: 160ms;
+  }
+
+  .search {
+    animation-delay: 240ms;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

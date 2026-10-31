@@ -1,0 +1,191 @@
+/* Mini animated condition icons inside the five-day forecast cards.
+   Icons live as <g> definitions in index.html; each card's <use>
+   points at one of them based on the day's WMO weather code. */
+
+.weather-sprite {
+  position: absolute;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
+
+.forecast-card__icon {
+  width: 3rem;
+  height: 2.25rem;
+  margin: var(--space-1) auto 0;
+  overflow: visible;
+}
+
+/* Paint comes from tokens so the icons follow light/dark and the white mode. */
+.wv-mini-rays {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+.wv-mini-sun,
+.wv-mini-bolt,
+.wv-mini-flakes {
+  fill: var(--color-accent);
+}
+
+.wv-mini-cloud,
+.wv-mini-fog {
+  fill: var(--color-text-secondary);
+}
+
+.wv-mini-drops {
+  stroke: var(--color-accent);
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .wv-mini-rays {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-mini-spin 44s linear infinite;
+  }
+
+  .wv-mini-sun {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-mini-sun-pulse 7s ease-in-out infinite;
+  }
+
+  .wv-mini-cloud-group {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: wv-mini-drift 9s ease-in-out infinite;
+  }
+
+  .wv-mini-cloud-group--back {
+    animation-duration: 12s;
+    animation-direction: reverse;
+  }
+
+  .wv-mini-drop {
+    transform-box: fill-box;
+    animation: wv-mini-rain 1.1s linear infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-mini-flake {
+    transform-box: fill-box;
+    animation: wv-mini-snow 4s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-mini-fog-line {
+    transform-box: fill-box;
+    animation: wv-mini-fog 8s ease-in-out infinite;
+    animation-delay: var(--d, 0s);
+  }
+
+  .wv-mini-bolt {
+    animation: wv-mini-flash 5.5s steps(1, end) infinite;
+  }
+}
+
+@keyframes wv-mini-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes wv-mini-sun-pulse {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes wv-mini-drift {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes wv-mini-rain {
+  0% {
+    transform: translateY(-2px);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(7px);
+    opacity: 0;
+  }
+}
+
+@keyframes wv-mini-snow {
+  0% {
+    transform: translate(0, -1px);
+    opacity: 0;
+  }
+
+  30% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translate(1px, 6px);
+    opacity: 0;
+  }
+}
+
+@keyframes wv-mini-fog {
+  0%,
+  100% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes wv-mini-flash {
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  40% {
+    opacity: 0.85;
+  }
+
+  84% {
+    opacity: 0.6;
+  }
+
+  85%,
+  88% {
+    opacity: 1;
+  }
+
+  86% {
+    opacity: 0.3;
+  }
+
+  90% {
+    opacity: 0.95;
+  }
+
+  93% {
+    opacity: 0.7;
+  }
+}
